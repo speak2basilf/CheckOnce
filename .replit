@@ -1,7 +1,6 @@
 @@ .. @@
  modules = ["nodejs-20", "web"]
-run = "npm run dev"
-+run = "cd project && npm run dev"
+run = "cd project && npm run dev"
  hidden = [".config", ".git", "generated-icon.png", "node_modules", "dist"]
  
  [nix]
@@ -9,10 +8,8 @@ run = "npm run dev"
  
  [deployment]
  deploymentTarget = "autoscale"
-build = ["npm", "run", "build"]
-run = ["npm", "run", "start"]
-+build = ["bash", "-c", "cd project && npm run build"]
-+run = ["bash", "-c", "cd project && npm run start"]
+build = ["bash", "-c", "cd project && npm install && npm run build"]
+run = ["bash", "-c", "cd project && npm run start"]
  
  [[ports]]
  localPort = 5000
@@ -36,6 +33,5 @@ run = ["npm", "run", "start"]
  
  [[workflows.workflow.tasks]]
  task = "shell.exec"
-args = "npm run dev"
-+args = "cd project && npm run dev"
+args = "cd project && npm run dev"
  waitForPort = 5000
